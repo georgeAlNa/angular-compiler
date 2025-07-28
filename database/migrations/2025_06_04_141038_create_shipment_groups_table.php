@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,7 +21,9 @@ return new class extends Migration
             $table->foreignId('to_governorate_id')->constrained('governorates');
             $table->foreignId('from_center_id')->constrained('company_centers');
             $table->foreignId('to_center_id')->constrained('company_centers');
-            $table->string('route_description');
+            $table->string('route_description')->nullable();
+            $table->enum('status', Status::values())->default(Status::PENDING_FOR_ASSIGNMENT->value);
+            $table->string('code')->nullable();
             $table->timestamps();
         });
     }

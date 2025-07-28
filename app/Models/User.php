@@ -2,15 +2,19 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\Role;
+use App\Traits\HasEnums;
+use App\Traits\Filterable;
+use App\Traits\Searchable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens, HasEnums, Filterable, Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +25,41 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'address',
+        'age',
+        'role',
+    ];
+
+    /**
+     * The attributes that are searchable.
+     *
+     * @var array<string>
+     */
+    protected $searchable = [
+        'name',
+        'email',
+        'phone',
+    ];
+
+    /**
+     * The attributes that are filterable.
+     *
+     * @var array<string>
+     */
+    protected $filterable = [
+        'where' => [
+            'name',
+            'email',
+            'phone',
+            'age',
+            'role',
+            'created_at',
+            'updated_at',
+        ],
+        'in' => [
+            'role',
+        ],
     ];
 
     /**
@@ -43,6 +82,23 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'role' => Role::class,
         ];
+    }
+
+    /**
+     * Get the driver profile for this user
+     */
+    public function driver(): HasOne
+    {
+        return $this->hasOne(Driver::class);
+    }
+
+    /**
+     * Get the delivery person profile for this user
+     */
+    public function deliveryPerson(): HasOne
+    {
+        return $this->hasOne(DeliveryPerson::class);
     }
 }

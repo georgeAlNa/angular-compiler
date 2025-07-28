@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('delivery_persons', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
+            $table->string('vehicle_description');
+            $table->string('driving_license_number');
             $table->foreignId('assigned_governorate_id')->constrained('governorates');
             $table->timestamps();
         });

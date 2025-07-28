@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
                 $table->foreignId('group_id')->constrained('shipment_groups');
      $table->foreignId('checkpoint_id')->constrained('checkpoints');
-    $table->dateTime('arrival_time');
             $table->timestamps();
         });
     }

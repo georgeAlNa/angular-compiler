@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('address');
             $table->integer('age');
             $table->string('role');
+            $table->string('profile_photo')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
