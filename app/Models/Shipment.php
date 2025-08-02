@@ -42,6 +42,7 @@ class Shipment extends BaseModel
         'destination_address',
         'status',
         'qr_code',
+        'code',
     ];
 
     protected $filterable = [

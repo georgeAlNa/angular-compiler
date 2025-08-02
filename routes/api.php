@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\GroupTrackingController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\ShipmentController;
 use App\Http\Controllers\Api\ShipmentGroupController;
+use App\Http\Controllers\CompanyCenterController;
 use Illuminate\Support\Facades\Route;
 
 // Authentication routes (public)
@@ -27,7 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 // Users routes - restricted to admin
-Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
     Route::get('users/all', [UserController::class, 'all']);
     Route::get('users', [UserController::class, 'index']);
     Route::post('users', [UserController::class, 'store']);
@@ -110,6 +111,16 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('governorates/{governorate}', [GovernorateController::class, 'update']);
         Route::delete('governorates/{governorate}', [GovernorateController::class, 'destroy']);
     });
+});
+
+// Company Centers routes
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('company-centers/all', [CompanyCenterController::class, 'all']);
+    Route::get('company-centers', [CompanyCenterController::class, 'index']);
+    Route::get('company-centers/{company_center}', [CompanyCenterController::class, 'show']);
+    Route::post('company-centers', [CompanyCenterController::class, 'store']);
+    Route::put('company-centers/{company_center}', [CompanyCenterController::class, 'update']);
+    Route::delete('company-centers/{company_center}', [CompanyCenterController::class, 'destroy']);
 });
 
 // Shipments routes

@@ -55,7 +55,7 @@ class CompanyCenter extends BaseModel
      *
      * @var array<string>
      */
-    protected $relationships = [
+    public $relationships = [
         'governorate',
     ];
 

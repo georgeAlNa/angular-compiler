@@ -30,7 +30,7 @@ class Checkpoint extends BaseModel
         ],
     ];
 
-    protected $relationships = [
+    public $relationships = [
         'governorate',
     ];
 

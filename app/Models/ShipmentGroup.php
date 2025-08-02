@@ -21,6 +21,7 @@ class ShipmentGroup extends BaseModel
         'to_center_id',
         'route_description',
         'status',
+        'code',
     ];
 
     protected $searchable = [
@@ -30,6 +31,7 @@ class ShipmentGroup extends BaseModel
         'toGovernorate.name',
         'fromCenter.name',
         'toCenter.name',
+        'code',
     ];
 
     protected $filterable = [
@@ -54,7 +56,7 @@ class ShipmentGroup extends BaseModel
         ],
     ];
 
-    protected $relationships = [
+    public $relationships = [
         'driver',
         'createdByAdmin',
         'lastUpdatedByAdmin',

@@ -91,7 +91,18 @@ class ShipmentSeeder extends Seeder
                 $priceSetAt = now()->subDays(rand(1, 30));
             }
 
-            Shipment::create([
+            $code = 'SH-' . str_pad($i, 6, '0', STR_PAD_LEFT);
+            
+            // Generate QR code data matching the ShipmentService format
+            $qrData = [
+                'sender_id' => $sender->id,
+                'receiver_id' => $receiver->id,
+                'shipment_code' => $code,
+                'shipment_id' => $i, // We'll update this after creation
+                'random_string' => \Illuminate\Support\Str::random(10),
+            ];
+
+            $shipment = Shipment::create([
                 'sender_id' => $sender->id,
                 'receiver_id' => $receiver->id,
                 'group_id' => $groupId,
@@ -106,12 +117,16 @@ class ShipmentSeeder extends Seeder
                 'destination_center_id' => $destinationCenter ? $destinationCenter->id : null,
                 'assigned_delivery_person_id' => $assignedDeliveryPersonId,
                 'status' => $status,
-                'qr_code' => 'QR-' . str_pad($i, 8, '0', STR_PAD_LEFT),
-                'code' => 'SH-' . str_pad($i, 8, '0', STR_PAD_LEFT),
+                'qr_code' => json_encode($qrData),
+                'code' => $code,
                 'price' => $price,
                 'price_set_by_admin_id' => $priceSetByAdminId,
                 'price_set_at' => $priceSetAt,
             ]);
+
+            // Update QR code with the actual shipment ID
+            $qrData['shipment_id'] = $shipment->id;
+            $shipment->update(['qr_code' => json_encode($qrData)]);
         }
     }
 

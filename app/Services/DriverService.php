@@ -31,7 +31,8 @@ class DriverService extends BaseService
             'toGovernorate',
             'fromCenter',
             'toCenter',
-            'groupCheckpoints'
+            'groupCheckpoints',
+            'shipments'
         ])
         ->where('driver_id', $driver->id)
         ->where('status', '!=', Status::DELIVERED->value)

@@ -45,7 +45,7 @@ class GroupTracking extends BaseModel
      * The relationships that should be loaded by default.
      * Include relationships that are commonly needed when fetching this model
      */
-    protected $relationships = [
+    public $relationships = [
         'shipmentGroup',
         'checkpoint',
     ];

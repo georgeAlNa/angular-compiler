@@ -21,7 +21,7 @@ class CompanyCenterResource extends JsonResource
             'name' => $this->name,
             'location' => $this->location,
             'governorate_id' => $this->governorate_id,
-            'governorate' => new GovernorateResource($this->whenLoaded('governorate')),
+            'governorate' => new \App\Http\Resources\GovernorateResource($this->whenLoaded('governorate')),
         ];
     }
 }

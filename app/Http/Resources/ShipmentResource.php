@@ -18,6 +18,7 @@ class ShipmentResource extends JsonResource
             'receiver_id' => $this->receiver_id,
             'group_id' => $this->group_id,
             'type_of_cargo' => $this->type_of_cargo,
+            'code' => $this->code,
             'weight' => $this->weight,
             'origin_address' => $this->origin_address,
             'destination_address' => $this->destination_address,
@@ -32,6 +33,7 @@ class ShipmentResource extends JsonResource
             'price_set_by_admin_id' => $this->price_set_by_admin_id,
             'price_set_at' => $this->price_set_at,
             'assigned_delivery_person_id' => $this->assigned_delivery_person_id,
+
 
             // Relationships
             'sender' => new UserResource($this->whenLoaded('sender')),

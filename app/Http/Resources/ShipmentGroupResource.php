@@ -20,6 +20,7 @@ class ShipmentGroupResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'driver_id' => $this->driver_id,
+            'code' => $this->code,
             'created_by_admin_id' => $this->created_by_admin_id,
             'last_updated_by_admin_id' => $this->last_updated_by_admin_id,
             'from_governorate_id' => $this->from_governorate_id,

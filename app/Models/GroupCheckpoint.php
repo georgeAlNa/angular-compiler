@@ -35,7 +35,7 @@ class GroupCheckpoint extends BaseModel
         ],
     ];
 
-    protected $relationships = [
+    public $relationships = [
         'group',
         'checkpoint',
     ];
