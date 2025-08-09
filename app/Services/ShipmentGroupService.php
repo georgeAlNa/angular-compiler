@@ -71,7 +71,101 @@ class ShipmentGroupService extends BaseService
         });
     }
 
-    public function deliverShipmentGroup(int $shipmentGroupId, int $driverId): ShipmentGroup
+    public function update(int $id, array $data): ShipmentGroup
+    {
+        $shipmentIds = $data['shipment_ids'] ?? null;
+        $checkpoints = $data['checkpoints'] ?? null;
+        unset($data['shipment_ids'], $data['checkpoints']);
+
+        return DB::transaction(function () use ($id, $data, $shipmentIds, $checkpoints) {
+            $shipmentGroup = ShipmentGroup::with(['shipments', 'groupCheckpoints'])->find($id);
+            if (!$shipmentGroup) {
+                throw new \Exception('Shipment group not found');
+            }
+
+            // Update group fields
+            $data['last_updated_by_admin_id'] = Auth::id();
+            if (!empty($data)) {
+                $shipmentGroup->update($data);
+            }
+
+            // Replace shipments set if provided
+            if (is_array($shipmentIds)) {
+                $newShipmentIds = array_values(array_unique(array_map('intval', $shipmentIds)));
+
+                $currentShipmentIds = $shipmentGroup->shipments->pluck('id')->all();
+                $toDetach = array_diff($currentShipmentIds, $newShipmentIds);
+                $toAttach = array_diff($newShipmentIds, $currentShipmentIds);
+
+                if (!empty($toDetach)) {
+                    Shipment::whereIn('id', $toDetach)->update(['group_id' => null]);
+                }
+
+                if (!empty($toAttach)) {
+                    Shipment::whereIn('id', $toAttach)->update(['group_id' => $shipmentGroup->id]);
+                }
+            }
+
+            // Replace checkpoints set if provided
+            if (is_array($checkpoints)) {
+                // Normalize checkpoints: keep entries with checkpoint_id and order
+                $normalized = [];
+                foreach ($checkpoints as $cp) {
+                    if (isset($cp['checkpoint_id'])) {
+                        $normalized[] = [
+                            'checkpoint_id' => (int) $cp['checkpoint_id'],
+                            'order' => (int) ($cp['order'] ?? 0),
+                        ];
+                    }
+                }
+
+                $newCheckpointIds = array_column($normalized, 'checkpoint_id');
+
+                // Remove checkpoints no longer in the list
+                if (!empty($newCheckpointIds)) {
+                    GroupCheckpoint::where('group_id', $shipmentGroup->id)
+                        ->whereNotIn('checkpoint_id', $newCheckpointIds)
+                        ->delete();
+
+                    // Also remove group trackings for those removed checkpoints
+                    \App\Models\GroupTracking::where('group_id', $shipmentGroup->id)
+                        ->whereNotIn('checkpoint_id', $newCheckpointIds)
+                        ->delete();
+                } else {
+                    // If empty array provided, clear all checkpoints and trackings
+                    GroupCheckpoint::where('group_id', $shipmentGroup->id)->delete();
+                    \App\Models\GroupTracking::where('group_id', $shipmentGroup->id)->delete();
+                }
+
+                // Upsert checkpoints with new order
+                foreach ($normalized as $cp) {
+                    GroupCheckpoint::updateOrCreate(
+                        [
+                            'group_id' => $shipmentGroup->id,
+                            'checkpoint_id' => $cp['checkpoint_id'],
+                        ],
+                        [
+                            'order' => $cp['order'],
+                        ]
+                    );
+                }
+            }
+
+            return $shipmentGroup->fresh([
+                'driver',
+                'createdByAdmin',
+                'lastUpdatedByAdmin',
+                'fromGovernorate',
+                'toGovernorate',
+                'fromCenter',
+                'toCenter',
+                'groupCheckpoints.checkpoint',
+                'shipments',
+            ]);
+        });
+    }
+
+    public function updateShipmentGroupStatus(int $shipmentGroupId, string $status, int $driverId): ShipmentGroup
     {
         $shipmentGroup = ShipmentGroup::with([
             'driver',
@@ -94,17 +188,23 @@ class ShipmentGroupService extends BaseService
             throw new \Exception('Driver is not assigned to this shipment group');
         }
 
-        return DB::transaction(function () use ($shipmentGroup) {
-            // Update shipment group status to delivered
+        return DB::transaction(function () use ($shipmentGroup, $status) {
             $shipmentGroup->update([
-                'status' => \App\Enums\Status::DELIVERED->value,
+                'status' => $status,
                 'last_updated_by_admin_id' => Auth::id()
             ]);
 
-            // Update all shipments in this group to "delivered to destination center"
-            $shipmentGroup->shipments()->update([
-                'status' => \App\Enums\Status::DELIVERED_TO_DESTINATION_CENTER->value
-            ]);
+            if ($status === \App\Enums\Status::IN_TRANSIT->value) {
+                // Start shipment: mark all shipments as in transit
+                $shipmentGroup->shipments()->update([
+                    'status' => \App\Enums\Status::IN_TRANSIT->value
+                ]);
+            } elseif ($status === \App\Enums\Status::DELIVERED->value) {
+                // End shipment: mark all shipments as delivered to destination center
+                $shipmentGroup->shipments()->update([
+                    'status' => \App\Enums\Status::DELIVERED_TO_DESTINATION_CENTER->value
+                ]);
+            }
 
             return $shipmentGroup->fresh([
                 'driver',
@@ -118,45 +218,6 @@ class ShipmentGroupService extends BaseService
                 'shipments'
             ]);
         });
-    }
-
-    public function updateShipmentGroupStatus(int $shipmentGroupId, string $status, int $driverId): ShipmentGroup
-    {
-        $shipmentGroup = ShipmentGroup::with([
-            'driver',
-            'createdByAdmin',
-            'lastUpdatedByAdmin',
-            'fromGovernorate',
-            'toGovernorate',
-            'fromCenter',
-            'toCenter',
-            'groupCheckpoints'
-        ])->find($shipmentGroupId);
-
-        if (!$shipmentGroup) {
-            throw new \Exception('Shipment group not found');
-        }
-
-        // If driver ID is provided, validate the driver is assigned to this group
-        if ($driverId && $shipmentGroup->driver_id !== $driverId) {
-            throw new \Exception('Driver is not assigned to this shipment group');
-        }
-
-        $shipmentGroup->update([
-            'status' => $status,
-            'last_updated_by_admin_id' => Auth::id()
-        ]);
-
-        return $shipmentGroup->fresh([
-            'driver',
-            'createdByAdmin',
-            'lastUpdatedByAdmin',
-            'fromGovernorate',
-            'toGovernorate',
-            'fromCenter',
-            'toCenter',
-            'groupCheckpoints'
-        ]);
     }
 
     public function getShipmentGroupCheckpoints(int $shipmentGroupId): \Illuminate\Support\Collection

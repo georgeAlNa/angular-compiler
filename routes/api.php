@@ -54,7 +54,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('drivers/available-shipment-groups', [DriverController::class, 'getAvailableShipmentsGroup']);
         Route::post('drivers/start-shipment', [DriverController::class, 'startShipment']);
         Route::post('drivers/end-shipment', [DriverController::class, 'endShipment']);
-        Route::post('drivers/deliver-shipment-group', [DriverController::class, 'deliverShipmentGroup']);
         Route::post('drivers/mark-checkpoint', [DriverController::class, 'markCheckpointAsChecked']);
     });
 

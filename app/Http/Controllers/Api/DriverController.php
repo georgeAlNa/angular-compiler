@@ -97,34 +97,6 @@ class DriverController extends BaseController
         }
     }
 
-    public function deliverShipmentGroup(Request $request): JsonResponse
-    {
-        try {
-            $request->validate([
-                'shipment_group_id' => 'required|integer|exists:shipment_groups,id'
-            ]);
-
-            $driver = Auth::user()->driver;
-            if (!$driver) {
-                throw new \Exception('Driver profile not found');
-            }
-
-            $shipmentGroupService = app(ShipmentGroupService::class);
-            $shipmentGroup = $shipmentGroupService->deliverShipmentGroup($request->shipment_group_id, $driver->id);
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Shipment group delivered successfully. All shipments marked as arrived to destination center.',
-                'data' => new ShipmentGroupResource($shipmentGroup)
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Failed to deliver shipment group',
-                'error' => $e->getMessage()
-            ], 500);
-        }
-    }
 
     public function markCheckpointAsChecked(Request $request): JsonResponse
     {

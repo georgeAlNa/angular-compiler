@@ -15,6 +15,13 @@ class ShipmentGroupUpdateRequest extends BaseRequest
             'from_center_id' => ['sometimes', 'integer', 'exists:company_centers,id'],
             'to_center_id' => ['sometimes', 'integer', 'exists:company_centers,id'],
             'route_description' => ['sometimes', 'string', 'max:255'],
+
+            'shipment_ids' => ['sometimes', 'array'],
+            'shipment_ids.*' => ['integer', 'distinct', 'exists:shipments,id'],
+
+            'checkpoints' => ['sometimes', 'array'],
+            'checkpoints.*.checkpoint_id' => ['required_with:checkpoints', 'integer', 'exists:checkpoints,id'],
+            'checkpoints.*.order' => ['nullable', 'integer', 'min:0'],
         ];
     }
 }

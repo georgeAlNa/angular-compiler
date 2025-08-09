@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('sender_id')->constrained('users');
             $table->foreignId('receiver_id')->constrained('users');
-            $table->foreignId('group_id')->nullable()->constrained('shipment_groups');
+            $table->foreignId('group_id')->nullable()->constrained('shipment_groups')->nullOnDelete();
             $table->string('type_of_cargo');
             $table->float('weight');
             $table->string('origin_address');

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('group_checkpoints', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('group_id')->constrained('shipment_groups');
+            $table->foreignId('group_id')->constrained('shipment_groups')->onDelete('cascade');
             $table->foreignId('checkpoint_id')->constrained('checkpoints');
             $table->integer('order');
             $table->timestamps();

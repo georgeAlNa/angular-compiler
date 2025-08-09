@@ -26,7 +26,7 @@ class ShipmentService extends BaseService
 
         $data['code'] = $code;
         $data['sender_id'] = Auth::id();
-        $data['status'] = Status::DRAFT->value;
+        $data['status'] = Status::PENDING_ADMIN_APPROVAL->value;
 
         // Create the shipment first to get the ID
         $shipment = parent::create($data);
