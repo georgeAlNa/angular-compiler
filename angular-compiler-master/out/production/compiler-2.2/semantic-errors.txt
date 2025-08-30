@@ -1,0 +1,245 @@
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'remove' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 40, Column 39
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'form' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 60, Column 7
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'save' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 60, Column 22
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'onName' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 61, Column 43
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'onPrice' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 62, Column 44
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'onDesc' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 63, Column 46
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'back' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 92, Column 37
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'remove' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 40, Column 39
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'form' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 60, Column 7
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'save' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 60, Column 22
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'onName' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 61, Column 43
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'onPrice' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 62, Column 44
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'onDesc' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 63, Column 46
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'back' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 92, Column 37
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'remove' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 40, Column 39
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'form' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 60, Column 7
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'save' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 60, Column 22
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'onName' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 61, Column 43
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'onPrice' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 62, Column 44
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'onDesc' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 63, Column 46
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'back' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 92, Column 37
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'remove' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 40, Column 39
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'form' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 60, Column 7
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'save' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 60, Column 22
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'onName' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 61, Column 43
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'onPrice' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 62, Column 44
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'onDesc' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 63, Column 46
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'back' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 92, Column 37
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'remove' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 40, Column 39
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'form' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 60, Column 7
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'save' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 60, Column 22
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'onName' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 61, Column 43
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'onPrice' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 62, Column 44
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'onDesc' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 63, Column 46
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'back' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 92, Column 37
+└─--------------------------------------------------
+

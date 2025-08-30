@@ -1,0 +1,38 @@
+@Component({
+  selector: 'app-root',
+  template: `
+    <div class="product-list">
+      <ul>
+
+        <li *ngFor="let product of  " (click)="selectProduct(product)">
+
+        </li>
+      </ul>
+    </div>
+
+  `,
+  styles: [
+    `
+    .product-list {
+      width: 40%;
+      float: 1;
+    }
+    .product-details {
+      width: 60%;
+      float: 1;
+    }
+    `
+  ]
+})
+export class AppComponent {
+  products = [
+    { name: 'Product 1', image: 'product1.png', details: 'Details about Product 1' , },
+    { name: 'Product 2', image: 'product2.png', details: 'Details about Product 2' , },
+  ];
+
+ selectedProduct = null;
+
+  selectProduct ( product ) {
+    this . selectedProduct = product;
+  }
+}

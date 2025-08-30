@@ -1,0 +1,56 @@
+Error:
+├─ Type: SEMANTIC
+├─ Message: *ngFor must have a data source (e.g., 'let item of items')
+├─ Details: Invalid *ngFor usage
+├─ Location: Line 7, Column 36
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: The identifier 'userName' is not defined in the component class
+├─ Details: Undefined identifier in template
+├─ Location: Line 5, Column 9
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Accessing property 'image' of 'selectedProduct' without null check (use ?. or *ngIf)
+├─ Details: Unsafe access to possibly null object
+├─ Location: Line 5, Column 23
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'nnnnn' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 13, Column 54
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'selectProduct' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 6, Column 55
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'selectProduct' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 6, Column 55
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Method 'selectProduct' is not defined
+├─ Details: Undefined method call
+├─ Location: Line 6, Column 55
+└─--------------------------------------------------
+
+Error:
+├─ Type: SEMANTIC
+├─ Message: Component must have a selector defined
+├─ Details: Missing required 'selector' in component
+├─ Location: Line 1, Column 0
+└─--------------------------------------------------
+

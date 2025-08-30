@@ -1,0 +1,31 @@
+package classes;
+
+public class CssDeclaration extends CssNode{
+
+    private String property;
+    private String value;
+
+    public String getProperty() {
+        return property;
+    }
+
+    public void setProperty(String property) {
+        this.property = property;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "\nCssDeclaration{" +
+                "\nproperty='" + property + '\'' +
+                ", \nvalue='" + value + '\'' +
+                "\n}";
+    }
+}

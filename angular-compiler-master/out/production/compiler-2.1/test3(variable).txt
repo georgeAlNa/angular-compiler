@@ -1,0 +1,10 @@
+
+@Component({
+  selector: 'app-product-list',
+  template: `
+    <p>{{ userName }}</p>
+  `
+})
+export class MyComponent {
+usreName='sara';
+}

@@ -1,0 +1,313 @@
+import { store } from "state";
+import { addProduct } from "state";
+import { removeProduct } from "state";
+import { navigate } from "state";
+import { getProduct } from "state";
+import { getId } from "state";
+
+@Component({
+  selector: 'app-root',
+  template: `
+    <nav class="topbar">
+          <h1></h1>
+          <a routerLink="/products" class="nav-link">{{allLabel}}</a>
+          <a routerLink="/add" class="nav-link">{{addLabel}}</a>
+        </nav>
+  `,
+  styles: [
+    `
+     .root {
+             primary: #4a90e2;
+             danger: #e74c3c;
+             dark: #2c3e50;
+             light: #ecf0f1;
+             shadow: 4;
+           }
+
+
+           .topbar {
+             display: 1;
+             gap: 24;
+             padding: 16;
+             background: var(--primary);
+             color: #4a90e2;
+           }
+
+           .nav-link {
+             color: #4a90e2;
+             padding: 8;
+           }
+
+           .nav-link {
+             background: #4a90e2;
+           }
+
+           .grid {
+             display: 12;
+             gap: 16;
+             padding: 20;
+           }
+
+           .card {
+             background: #4a90e2;
+             border: 1;
+             padding: 16;
+           }
+
+           .card {
+             transform: 4;
+           }
+
+           .card {
+             margin: 0;
+             color: #4a90e2;
+           }
+
+           .card {
+             margin: 8;
+             color: #555;
+           }
+
+           .btn {
+             background: #4a90e2;
+             color: #4a90e2;
+             padding: 8;
+           }
+
+           .btn {
+             background: #3a7bc8;
+           }
+
+           .btn {
+             background: #4a90e2;
+           }
+
+           .btn {
+             background: #c0392b;
+           }
+
+           .product-image {
+             width: 100;
+             height: 150;
+           }
+
+           .section {
+             margin: 20;
+             padding: 20;
+             background: #4a90e2;
+           }
+
+           .textarea {
+             width: 100;
+             padding: 10;
+             margin: 8;
+           }
+
+           .price {
+             color: #4a90e2;
+           }
+    `
+  ]
+})
+export class App {
+  allLabel = "All Products";
+  addLabel = "Add Product";
+}
+
+@Component({
+  selector: 'app-products',
+  template: `
+<div class="grid" route="/products">
+      <div class="card" *ngFor="let p of items">
+        <h3>{{p.name}}</h3>
+        <p>{{p.price}}</p>
+        <div>
+          <a routerLink="/detail/{{p.id}}">{{detailsLabel}}</a>
+          <button class="btn" (click)="remove(p.id)">{{deleteLabel}}</button>
+        </div>
+      </div>
+    </div>
+        `
+})
+export class ProductsList {
+
+}
+
+@Component({
+  selector: 'app-add',
+  template: `
+     <section route="/add">
+          <h2>{{addTitle}}</h2>
+          <form (submit)="save($event)">
+            <input placeholder="Product Name" (input)="onName($event.target.value)" />
+            <input type="number" placeholder="Price (as 290$)" (input)="onPrice($event.target.value)" />
+            <textarea placeholder="Description (as Premium Product)" (input)="onDesc($event.target)"></textarea>
+            <button class="btn" type="submit">{{saveLabel}}</button>
+          </form>
+        </section>
+  `
+})
+export class AddProduct {
+
+}
+
+@Component({
+  selector: 'app-detail',
+  template: `
+   <section class="card" route="/detail/:id">
+         <div>
+
+           <div class="fake-rating">
+             <em>From 5 Star</em>
+           </div>
+
+
+
+           <button class="btn" (click)="back()">
+             {{ backLabel }}
+           </button>
+         </div>
+       </section>
+  `
+  ,
+    styles: [`
+      :root {
+          --primary: #4a90e2;
+          --danger: #e74c3c;
+          --dark: #2c3e50;
+          --light: #ecf0f1;
+          --shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f9f9f9; }
+
+        .topbar {
+          display: flex;
+          align-items: center;
+          gap: 24px;
+          padding: 16px 20px;
+          background: var(--primary);
+          color: white;
+          box-shadow: var(--shadow);
+        }
+
+        .logo {
+          margin: 0;
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+
+        .nav-link {
+          color: white;
+          text-decoration: none;
+          padding: 8px 16px;
+          border-radius: 6px;
+          transition: background 0.3s;
+        }
+
+        .nav-link:hover {
+          background: rgba(255,255,255,0.2);
+        }
+
+        .grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+          gap: 16px;
+          padding: 20px;
+        }
+
+        .card {
+          background: white;
+          border: 1px solid #ddd;
+          border-radius: 12px;
+          padding: 16px;
+          box-shadow: var(--shadow);
+          transition: transform 0.2s;
+        }
+
+        .card:hover {
+          transform: translateY(-4px);
+        }
+
+        .card h3 {
+          margin: 0 0 8px 0;
+          color: var(--dark);
+          font-size: 1.2rem;
+        }
+
+        .card p {
+          margin: 8px 0;
+          color: #555;
+        }
+
+        .btn {
+          background: var(--primary);
+          color: white;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 6px;
+          cursor: pointer;
+          font-size: 0.9rem;
+          margin-top: 8px;
+          transition: background 0.3s;
+        }
+
+        .btn:hover {
+          background: #3a7bc8;
+        }
+
+        .btn.danger {
+          background: var(--danger);
+        }
+
+        .btn.danger:hover {
+          background: #c0392b;
+        }
+
+        .product-image {
+          width: 100%;
+          height: 150px;
+          object-fit: cover;
+          border-radius: 8px;
+          margin-bottom: 12px;
+        }
+
+        section {
+          max-width: 600px;
+          margin: 20px auto;
+          padding: 20px;
+          background: white;
+          border-radius: 12px;
+          box-shadow: var(--shadow);
+        }
+
+        input, textarea {
+          width: 100%;
+          padding: 10px;
+          margin: 8px 0;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          font-size: 1rem;
+        }
+
+        input:focus, textarea:focus {
+          outline: none;
+          border-color: var(--primary);
+        }
+
+        .price {
+          font-weight: bold;
+          color: var(--primary);
+        }
+
+    `]
+})
+
+export class ProductDetail {
+ backLabel: any;
+ notFoundLabel: any;
+ back() {
+ throw new Error('Method not implemented.');
+ }
+ product: any;
+}
